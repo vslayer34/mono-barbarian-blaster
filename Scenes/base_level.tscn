@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://diojofd6p2jvn"]
+[gd_scene load_steps=9 format=3 uid="uid://diojofd6p2jvn"]
 
 [ext_resource type="MeshLibrary" uid="uid://bur0u11vdhf1i" path="res://MeshLibraries/ML_mesh-library.tres" id="1_5gpc1"]
 [ext_resource type="PackedScene" uid="uid://dne74sty7c6mc" path="res://Scenes/Enemy/enemy.tscn" id="2_5s04l"]
+[ext_resource type="PackedScene" uid="uid://bdk750yjgwrdw" path="res://Scenes/Allies/home_base.tscn" id="3_577fb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i06e5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -71,4 +72,7 @@ path_u_distance = 1.0
 path_joined = false
 
 [node name="Enemy" parent="Path3D" instance=ExtResource("2_5s04l")]
-transform = Transform3D(0.999961, -3.60535e-05, -0.00887621, 0, 0.999992, -0.00406175, 0.00887631, 0.0040616, 0.999949, -14.0574, 0, 13.2623)
+transform = Transform3D(0.999961, -3.60594e-05, -0.00887766, -3.63798e-12, 0.999992, -0.00406175, 0.00887776, 0.0040616, 0.999949, -14.0574, 0, 13.2623)
+
+[node name="HomeBase" parent="." instance=ExtResource("3_577fb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2585, 0, 2.1777)

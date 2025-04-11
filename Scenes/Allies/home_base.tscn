@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdk750yjgwrdw"]
+
+[ext_resource type="Script" uid="uid://c0hkpn3esupso" path="res://Scripts/Allies/HomeBase.cs" id="1_pipgd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4jmu"]
+albedo_color = Color(0.715429, 0.724026, 0.204881, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pipgd"]
+albedo_color = Color(0.715429, 0.724026, 0.204881, 1)
+
+[node name="HomeBase" type="Node3D" groups=["Home Base"]]
+script = ExtResource("1_pipgd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(4, 1, 4)
+material = SubResource("StandardMaterial3D_c4jmu")
+
+[node name="Tower" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49968, 1, 1.47754)
+height = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_pipgd")
+
+[node name="Tower2" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 1.478)
+height = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_pipgd")
+
+[node name="Tower3" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49968, 1, -1.478)
+height = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_pipgd")
+
+[node name="Tower4" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -1.478)
+height = 1.0
+sides = 16
+material = SubResource("StandardMaterial3D_pipgd")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500452, 0)
+radius = 1.0
+rings = 16
+material = SubResource("StandardMaterial3D_pipgd")
