@@ -10,38 +10,46 @@ albedo_color = Color(0.715429, 0.724026, 0.204881, 1)
 
 [node name="HomeBase" type="Node3D" groups=["Home Base"]]
 script = ExtResource("1_pipgd")
+_maxHitPoints = 5
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CastleMesh" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 size = Vector3(4, 1, 4)
 material = SubResource("StandardMaterial3D_c4jmu")
 
-[node name="Tower" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="Tower" type="CSGCylinder3D" parent="CastleMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49968, 1, 1.47754)
 height = 1.0
 sides = 16
 material = SubResource("StandardMaterial3D_pipgd")
 
-[node name="Tower2" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="Tower2" type="CSGCylinder3D" parent="CastleMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 1.478)
 height = 1.0
 sides = 16
 material = SubResource("StandardMaterial3D_pipgd")
 
-[node name="Tower3" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="Tower3" type="CSGCylinder3D" parent="CastleMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49968, 1, -1.478)
 height = 1.0
 sides = 16
 material = SubResource("StandardMaterial3D_pipgd")
 
-[node name="Tower4" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="Tower4" type="CSGCylinder3D" parent="CastleMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -1.478)
 height = 1.0
 sides = 16
 material = SubResource("StandardMaterial3D_pipgd")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CastleMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500452, 0)
 radius = 1.0
 rings = 16
 material = SubResource("StandardMaterial3D_pipgd")
+
+[node name="HitPointsLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.76859)
+billboard = 1
+text = "Starting Hitpoints"
+font_size = 500
+outline_size = 100
