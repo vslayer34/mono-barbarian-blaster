@@ -26,7 +26,14 @@ public partial class HomeBase : Node3D
         CurrentHitPoints--;
     }
 
-    private void SetHitPointsLabel<T>(T hitPoints) => _hitPointsLabel.Text = $"{hitPoints}";
+    private void SetHitPointsLabel<T>(T hitPoints)
+    {
+        Color fullHealthColor = Colors.White;
+        Color dangerHealthColor = Colors.Red;
+
+        _hitPointsLabel.Text = $"{hitPoints} / {_maxHitPoints}";
+        _hitPointsLabel.Modulate =  dangerHealthColor.Lerp(fullHealthColor, (float)CurrentHitPoints / _maxHitPoints);
+    }
 
     // Getters & Setters---------------------------------------------------------------------------
 
