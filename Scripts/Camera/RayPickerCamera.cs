@@ -9,6 +9,8 @@ public partial class RayPickerCamera : Camera3D
     private RayCast3D _rayCaster;
     private Vector2 _mousePosition;
 
+    private GridMap _gridMap;
+
 
 
     // Game Loop Methods---------------------------------------------------------------------------
@@ -25,12 +27,33 @@ public partial class RayPickerCamera : Camera3D
         _rayCaster.TargetPosition = ProjectLocalRayNormal(_mousePosition) *_rayDistance;
         _rayCaster.ForceRaycastUpdate();
 
-        GD.PrintT(_rayCaster.GetCollider(), _rayCaster.GetCollisionPoint());
+        if (_rayCaster.IsColliding())
+        {
+            if (_rayCaster.GetCollider() is GridMap)
+            {
+                LevelGridMap = _rayCaster.GetCollider() as GridMap;
+                var cellPosition = LevelGridMap.LocalToMap(_rayCaster.GetCollisionPoint());
+                GD.Print(cellPosition);
 
-        GD.Print(_rayCaster.GetCollider());
-        GD.Print(_rayCaster.GetCollisionPoint());
+                if (LevelGridMap.GetCellItem(cellPosition) == 0)
+                {
+                    LevelGridMap.SetCellItem(cellPosition, 1);
+                }
+            }   
+        }
     }
 
 
     // Member Methods------------------------------------------------------------------------------
+
+    // Getters & Setters---------------------------------------------------------------------------
+
+    public GridMap LevelGridMap
+    {
+        get => _gridMap; 
+        set
+        {
+            _gridMap ??= value;
+        }
+    }
 }
