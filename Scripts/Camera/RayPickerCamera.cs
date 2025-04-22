@@ -1,3 +1,4 @@
+using BarbarianBlaster.Helper.Constants;
 using Godot;
 using System;
 
@@ -29,17 +30,26 @@ public partial class RayPickerCamera : Camera3D
 
         if (_rayCaster.IsColliding())
         {
+            Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
+            
             if (_rayCaster.GetCollider() is GridMap)
             {
-                LevelGridMap = _rayCaster.GetCollider() as GridMap;
-                var cellPosition = LevelGridMap.LocalToMap(_rayCaster.GetCollisionPoint());
-                GD.Print(cellPosition);
-
-                if (LevelGridMap.GetCellItem(cellPosition) == 0)
+                if (Input.IsActionJustPressed(InputConst.CLICK))
                 {
-                    LevelGridMap.SetCellItem(cellPosition, 1);
+                    LevelGridMap = _rayCaster.GetCollider() as GridMap;
+                    var cellPosition = LevelGridMap.LocalToMap(_rayCaster.GetCollisionPoint());
+                    GD.Print(cellPosition);
+
+                    if (LevelGridMap.GetCellItem(cellPosition) == 0)
+                    {
+                        LevelGridMap.SetCellItem(cellPosition, 1);
+                    }
                 }
             }   
+        }
+        else
+        {
+            Input.SetDefaultCursorShape(Input.CursorShape.Arrow);
         }
     }
 

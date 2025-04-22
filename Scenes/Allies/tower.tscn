@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://yj3ma2wrk8hp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_el8q3"]
+albedo_color = Color(0.11491, 0.357438, 0.0470801, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_el8q3"]
+material = SubResource("StandardMaterial3D_el8q3")
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jq3ya"]
+albedo_color = Color(0.11491, 0.357438, 0.0470801, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jq3ya"]
+material = SubResource("StandardMaterial3D_jq3ya")
+top_radius = 0.6
+bottom_radius = 0.6
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryoxx"]
+albedo_color = Color(0.11491, 0.357438, 0.0470801, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_el8q3"]
+material = SubResource("StandardMaterial3D_ryoxx")
+height = 0.35
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2t65x"]
+albedo_color = Color(0.157369, 0.160567, 0.158502, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ryoxx"]
+material = SubResource("StandardMaterial3D_2t65x")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sex5g"]
+albedo_color = Color(0.269186, 0.269186, 0.269186, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2t65x"]
+material = SubResource("StandardMaterial3D_sex5g")
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.5
+
+[node name="Tower" type="Node3D"]
+
+[node name="TowerBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_el8q3")
+
+[node name="TowerRing" type="MeshInstance3D" parent="TowerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_jq3ya")
+
+[node name="TowerTurret" type="MeshInstance3D" parent="TowerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("SphereMesh_el8q3")
+
+[node name="GunBarrel" type="MeshInstance3D" parent="TowerBody/TowerTurret"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.13087, 0.975183)
+mesh = SubResource("CylinderMesh_ryoxx")
+
+[node name="GunShroud" type="MeshInstance3D" parent="TowerBody/TowerTurret"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.13087, 1.23231)
+mesh = SubResource("CylinderMesh_2t65x")

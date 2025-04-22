@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://diojofd6p2jvn"]
+[gd_scene load_steps=12 format=3 uid="uid://diojofd6p2jvn"]
 
 [ext_resource type="MeshLibrary" uid="uid://bur0u11vdhf1i" path="res://MeshLibraries/ML_mesh-library.tres" id="1_5gpc1"]
 [ext_resource type="PackedScene" uid="uid://ddanktom457xs" path="res://Scenes/Utilities/ray_picker_camera.tscn" id="1_l7ey7"]
 [ext_resource type="PackedScene" uid="uid://dne74sty7c6mc" path="res://Scenes/Enemy/enemy.tscn" id="2_5s04l"]
 [ext_resource type="PackedScene" uid="uid://bdk750yjgwrdw" path="res://Scenes/Allies/home_base.tscn" id="3_577fb"]
+[ext_resource type="Script" uid="uid://rj4nogrbbnl8" path="res://Scripts/Allies/TurretManager.cs" id="5_sur3v"]
+[ext_resource type="PackedScene" uid="uid://yj3ma2wrk8hp" path="res://Scenes/Allies/tower.tscn" id="6_4rblm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i06e5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -93,3 +95,7 @@ progress = 20.0
 
 [node name="HomeBase" parent="." instance=ExtResource("3_577fb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2585, 0, 2.1777)
+
+[node name="TurretManager" type="Node3D" parent="."]
+script = ExtResource("5_sur3v")
+_defenceTower = ExtResource("6_4rblm")
