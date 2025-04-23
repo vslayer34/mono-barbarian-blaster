@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://diojofd6p2jvn"]
+[gd_scene load_steps=13 format=3 uid="uid://diojofd6p2jvn"]
 
+[ext_resource type="Script" uid="uid://bugpf7n0lj11r" path="res://Scripts/Managers/LevelManager.cs" id="1_4rblm"]
 [ext_resource type="MeshLibrary" uid="uid://bur0u11vdhf1i" path="res://MeshLibraries/ML_mesh-library.tres" id="1_5gpc1"]
 [ext_resource type="PackedScene" uid="uid://ddanktom457xs" path="res://Scenes/Utilities/ray_picker_camera.tscn" id="1_l7ey7"]
 [ext_resource type="PackedScene" uid="uid://dne74sty7c6mc" path="res://Scenes/Enemy/enemy.tscn" id="2_5s04l"]
@@ -31,7 +32,9 @@ _data = {
 }
 point_count = 22
 
-[node name="BaseLevel" type="Node3D"]
+[node name="BaseLevel" type="Node3D" node_paths=PackedStringArray("_turretManager")]
+script = ExtResource("1_4rblm")
+_turretManager = NodePath("TurretManager")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5s04l")

@@ -1,6 +1,8 @@
 using BarbarianBlaster.Helper.Constants;
+using BarbarianBlaster.Managers;
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class RayPickerCamera : Camera3D
 {
@@ -12,13 +14,18 @@ public partial class RayPickerCamera : Camera3D
 
     private GridMap _gridMap;
 
+    private LevelManager _levelManager;
+
 
 
     // Game Loop Methods---------------------------------------------------------------------------
 
-    public override void _Ready()
+    public override async void _Ready()
     {
         _rayCaster = GetNode<RayCast3D>("RayCast3D");
+
+        await ToSignal(Owner, SignalName.Ready);
+        _levelManager = GetOwner<LevelManager>();
     }
 
     public override void _Process(double delta)
@@ -43,6 +50,7 @@ public partial class RayPickerCamera : Camera3D
                     if (LevelGridMap.GetCellItem(cellPosition) == 0)
                     {
                         LevelGridMap.SetCellItem(cellPosition, 1);
+                        _levelManager.BuildTurret(LevelGridMap.MapToLocal(cellPosition));
                     }
                 }
             }   

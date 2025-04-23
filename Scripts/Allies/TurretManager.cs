@@ -10,10 +10,12 @@ public partial class TurretManager : Node3D
 
     // Game Loop Methods---------------------------------------------------------------------------
 
-    public override void _Ready()
-    {
-        var createdTower = _defenceTower.Instantiate();
-        AddChild(createdTower);
-    }
+    // Member Methods------------------------------------------------------------------------------
 
+    public void SpawnTurretAtPosition(Vector3 spawnPosition)
+    {
+        var createdTower = _defenceTower.Instantiate<Node3D>();
+        AddChild(createdTower);
+        createdTower.GlobalPosition = spawnPosition;
+    }
 }
