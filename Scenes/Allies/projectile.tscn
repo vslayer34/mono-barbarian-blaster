@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://wcmhlqekbtna"]
+
+[ext_resource type="Script" uid="uid://b0xh573igye0y" path="res://Scripts/Allies/Projectile.cs" id="1_iq115"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic7vu"]
+albedo_color = Color(0.689063, 0.710448, 0.0842323, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ic7vu"]
+material = SubResource("StandardMaterial3D_ic7vu")
+top_radius = 0.125
+bottom_radius = 0.125
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iq115"]
+albedo_color = Color(0.70366, 0.568213, 0.226884, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iq115"]
+material = SubResource("StandardMaterial3D_iq115")
+top_radius = 0.01
+bottom_radius = 0.126
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ic7vu"]
+height = 1.46582
+radius = 0.12793
+
+[node name="Projectile" type="Area3D"]
+top_level = true
+script = ExtResource("1_iq115")
+
+[node name="ShellBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
+mesh = SubResource("CylinderMesh_ic7vu")
+
+[node name="Shell" type="MeshInstance3D" parent="ShellBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("CylinderMesh_iq115")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -3.19511e-08, -0.730957)
+shape = SubResource("CylinderShape3D_ic7vu")
+
+[node name="LifeSpanTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
