@@ -1,3 +1,5 @@
+using BarbarianBlaster.Helper.Constants;
+using BarbarianBlaster.Helper.Groups;
 using Godot;
 using System;
 
@@ -18,11 +20,13 @@ public partial class Projectile : Area3D
     {
         _lifeSpanTimer = GetNode<Timer>("LifeSpanTimer");
         _lifeSpanTimer.Timeout += SelfDestruct;
+        AreaEntered += DamageEnemy;
     }
 
     public override void _ExitTree()
     {
         _lifeSpanTimer.Timeout -= SelfDestruct;
+        AreaEntered -= DamageEnemy;
     }
 
 
@@ -36,5 +40,16 @@ public partial class Projectile : Area3D
     private void SelfDestruct()
     {
         QueueFree();
+    }
+
+    private void DamageEnemy(Area3D area)
+    {
+        if (GetTree().HasGroup(SC_Groups.ENEMY_AREA))
+        {
+            var enemy = area.GetParent<Enemy>();
+            
+            enemy?.TakeDamage(10.0f);
+            SelfDestruct();
+        }
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dne74sty7c6mc"]
+[gd_scene load_steps=5 format=3 uid="uid://dne74sty7c6mc"]
 
 [ext_resource type="Script" uid="uid://bja2renp4aq5x" path="res://Scripts/Enemy/Enemy.cs" id="1_mw074"]
 
@@ -10,11 +10,22 @@ material = SubResource("StandardMaterial3D_5gpc1")
 radius = 1.0
 height = 3.0
 
-[node name="Enemy" type="PathFollow3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mw074"]
+radius = 1.0
+height = 3.0
+
+[node name="Enemy" type="PathFollow3D" node_paths=PackedStringArray("_enemyArea") groups=["enemy_area"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0, 0, 0)
 loop = false
 script = ExtResource("1_mw074")
+_enemyArea = NodePath("EnemyArea")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("CapsuleMesh_5gpc1")
+
+[node name="EnemyArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_mw074")

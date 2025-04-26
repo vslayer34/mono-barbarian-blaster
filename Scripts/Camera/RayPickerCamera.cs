@@ -41,7 +41,7 @@ public partial class RayPickerCamera : Camera3D
             
             if (_rayCaster.GetCollider() is GridMap)
             {
-                if (Input.IsActionJustPressed(InputConst.CLICK))
+                if (Input.IsActionJustPressed(InputConsts.CLICK))
                 {
                     LevelGridMap = _rayCaster.GetCollider() as GridMap;
                     var cellPosition = LevelGridMap.LocalToMap(_rayCaster.GetCollisionPoint());
