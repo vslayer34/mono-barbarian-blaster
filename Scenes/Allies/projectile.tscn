@@ -33,11 +33,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 mesh = SubResource("CylinderMesh_ic7vu")
 
 [node name="Shell" type="MeshInstance3D" parent="ShellBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.749186, -6.55315e-08)
 mesh = SubResource("CylinderMesh_iq115")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -3.19511e-08, -0.730957)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -3.19511e-08, -0.267299)
 shape = SubResource("CylinderShape3D_ic7vu")
 
 [node name="LifeSpanTimer" type="Timer" parent="."]

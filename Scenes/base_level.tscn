@@ -32,9 +32,10 @@ _data = {
 }
 point_count = 22
 
-[node name="BaseLevel" type="Node3D" node_paths=PackedStringArray("_turretManager")]
+[node name="BaseLevel" type="Node3D" node_paths=PackedStringArray("_turretManager", "LevelPath")]
 script = ExtResource("1_4rblm")
 _turretManager = NodePath("TurretManager")
+LevelPath = NodePath("Path3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5s04l")
