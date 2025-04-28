@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://diojofd6p2jvn"]
+[gd_scene load_steps=14 format=3 uid="uid://diojofd6p2jvn"]
 
 [ext_resource type="Script" uid="uid://bugpf7n0lj11r" path="res://Scripts/Managers/LevelManager.cs" id="1_4rblm"]
 [ext_resource type="MeshLibrary" uid="uid://bur0u11vdhf1i" path="res://MeshLibraries/ML_mesh-library.tres" id="1_5gpc1"]
 [ext_resource type="PackedScene" uid="uid://ddanktom457xs" path="res://Scenes/Utilities/ray_picker_camera.tscn" id="1_l7ey7"]
 [ext_resource type="PackedScene" uid="uid://dne74sty7c6mc" path="res://Scenes/Enemy/enemy.tscn" id="2_5s04l"]
 [ext_resource type="PackedScene" uid="uid://bdk750yjgwrdw" path="res://Scenes/Allies/home_base.tscn" id="3_577fb"]
+[ext_resource type="Script" uid="uid://btd4hvrg0nwsr" path="res://Scripts/Enemy/EnemyPath.cs" id="4_4rblm"]
 [ext_resource type="Script" uid="uid://rj4nogrbbnl8" path="res://Scripts/Allies/TurretManager.cs" id="5_sur3v"]
 [ext_resource type="PackedScene" uid="uid://yj3ma2wrk8hp" path="res://Scenes/Allies/tower.tscn" id="6_4rblm"]
 
@@ -35,7 +36,7 @@ point_count = 22
 [node name="BaseLevel" type="Node3D" node_paths=PackedStringArray("_turretManager", "LevelPath")]
 script = ExtResource("1_4rblm")
 _turretManager = NodePath("TurretManager")
-LevelPath = NodePath("Path3D")
+LevelPath = NodePath("EnemyPath")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5s04l")
@@ -60,10 +61,13 @@ data = {
 "cells": PackedInt32Array(65535, 65535, 1179648, 65535, 65534, 1179648, 1, 65535, 1179648, 3, 65535, 1179648, 4, 65535, 1179648, 65534, 65535, 1179648, 65533, 65535, 1179648, 65532, 65535, 1179648, 65531, 65535, 1179648, 65531, 65533, 1179648, 65532, 65533, 1179648, 65533, 65533, 1179648, 65534, 65533, 1179648, 65534, 65534, 1179648, 3, 65534, 1179648, 4, 0, 1179648, 4, 1, 1179648, 4, 2, 1179648, 3, 2, 1179648, 2, 2, 1179648, 1, 2, 1179648, 0, 2, 1179648, 65535, 2, 1179648, 65534, 2, 1179648, 65533, 2, 1179648, 65531, 2, 1179648, 65531, 1, 1179648, 65531, 0, 1179648, 65531, 65534, 1179648, 65535, 65533, 1179648, 0, 65533, 1179648, 1, 65533, 1179648, 2, 65533, 1179648, 3, 65533, 1179648, 4, 65533, 1179648, 4, 65534, 1179648, 1, 0, 1179648, 65535, 0, 1179648, 65532, 65534, 1179648, 65533, 65534, 1179648, 65533, 1, 1179648, 1, 1, 1179648, 2, 1, 1179648, 3, 1, 1179648)
 }
 
-[node name="Path3D" type="Path3D" parent="."]
+[node name="EnemyPath" type="Path3D" parent="." node_paths=PackedStringArray("_spawnTimer")]
 curve = SubResource("Curve3D_5gpc1")
+script = ExtResource("4_4rblm")
+_enemyScene = ExtResource("2_5s04l")
+_spawnTimer = NodePath("EnemySpanwTimer")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="EnemyPath"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0117378, -0.00990343, 0.0263948)
 polygon = PackedVector2Array(-1.95, 0, -1.8, 0.1, -1.325, 0.05, 1.325, 0.05, 1.8, 0.1, 1.95, 0)
 mode = 2
@@ -78,24 +82,9 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="Enemy" parent="Path3D" instance=ExtResource("2_5s04l")]
-transform = Transform3D(0.999961, -3.60594e-05, -0.00887766, -3.63798e-12, 0.999992, -0.00406175, 0.00887776, 0.0040616, 0.999949, -14.0574, 0, 13.2623)
-
-[node name="Enemy2" parent="Path3D" instance=ExtResource("2_5s04l")]
-transform = Transform3D(0.999961, -3.60594e-05, -0.00887766, -3.63798e-12, 0.999992, -0.00406175, 0.00887776, 0.0040616, 0.999949, -14.0379, 0.021476, 8.18699)
-progress = 5.0
-
-[node name="Enemy3" parent="Path3D" instance=ExtResource("2_5s04l")]
-transform = Transform3D(0.992997, -0.00052652, -0.11814, 0.00048891, 1, -0.000347336, 0.118141, 0.000287144, 0.992993, -13.6998, 0.0300102, 3.20664)
-progress = 10.0
-
-[node name="Enemy4" parent="Path3D" instance=ExtResource("2_5s04l")]
-transform = Transform3D(0.170543, 4.11369e-05, -0.985347, -0.000241211, 1, 1.09139e-11, 0.985351, 0.000237678, 0.170542, -9.10679, 0.0299072, 1.8619)
-progress = 15.0
-
-[node name="Enemy5" parent="Path3D" instance=ExtResource("2_5s04l")]
-transform = Transform3D(-0.868141, -0.000209405, -0.496317, -0.000241211, 1, -3.63797e-12, 0.496319, 0.000119718, -0.868138, -5.62104, 0.0299072, 4.81067)
-progress = 20.0
+[node name="EnemySpanwTimer" type="Timer" parent="EnemyPath"]
+wait_time = 2.0
+autostart = true
 
 [node name="HomeBase" parent="." instance=ExtResource("3_577fb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2585, 0, 2.1777)
