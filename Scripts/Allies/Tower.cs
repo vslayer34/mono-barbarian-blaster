@@ -1,3 +1,4 @@
+using BarbarianBlaster.Helper.Constants;
 using Godot;
 using System;
 
@@ -11,6 +12,9 @@ public partial class Tower : Node3D
 
     [Export]
     private Marker3D _projectileSpawnPosition;
+
+    [Export]
+    private AnimationPlayer _animator;
 
     private Timer _fireRateTimer;
 
@@ -83,6 +87,8 @@ public partial class Tower : Node3D
         projectile.ForwardDirection = GlobalTransform.Basis.Z;
         // projectile.Basis = Basis;
         projectile.Rotation = GlobalRotation;
+        
+        _animator.Play(AnimationConsts.Turret.SHOOT_SHELL);
     }
 
 }

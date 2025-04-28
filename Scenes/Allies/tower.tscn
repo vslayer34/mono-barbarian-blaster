@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://yj3ma2wrk8hp"]
+[gd_scene load_steps=16 format=3 uid="uid://yj3ma2wrk8hp"]
 
 [ext_resource type="Script" uid="uid://cdaxgtsjl77dr" path="res://Scripts/Allies/Tower.cs" id="1_jq3ya"]
 [ext_resource type="PackedScene" uid="uid://wcmhlqekbtna" path="res://Scenes/Allies/projectile.tscn" id="2_ryoxx"]
@@ -45,10 +45,48 @@ top_radius = 0.06
 bottom_radius = 0.06
 height = 0.5
 
-[node name="Tower" type="Node3D" node_paths=PackedStringArray("_projectileSpawnPosition")]
+[sub_resource type="Animation" id="Animation_ryoxx"]
+resource_name = "shoot_shell"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TowerBody/TowerTurret/GunBarrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.13087, 0.975183), Vector3(0, 0.13087, 0.708099), Vector3(0, 0.13087, 0.975183)]
+}
+
+[sub_resource type="Animation" id="Animation_2t65x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TowerBody/TowerTurret/GunBarrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.13087, 0.975183)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2t65x"]
+_data = {
+&"RESET": SubResource("Animation_2t65x"),
+&"shoot_shell": SubResource("Animation_ryoxx")
+}
+
+[node name="Tower" type="Node3D" node_paths=PackedStringArray("_projectileSpawnPosition", "_animator")]
 script = ExtResource("1_jq3ya")
 _projectileScene = ExtResource("2_ryoxx")
 _projectileSpawnPosition = NodePath("TowerBody/TowerTurret/GunBarrel/ProjectileExitPosition")
+_animator = NodePath("AnimationPlayer")
 
 [node name="TowerBody" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -67,11 +105,17 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.1
 mesh = SubResource("CylinderMesh_ryoxx")
 
 [node name="ProjectileExitPosition" type="Marker3D" parent="TowerBody/TowerTurret/GunBarrel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676649, -1.19209e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01504, -2.38419e-07)
 
-[node name="GunShroud" type="MeshInstance3D" parent="TowerBody/TowerTurret"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.13087, 1.23231)
+[node name="GunShroud" type="MeshInstance3D" parent="TowerBody/TowerTurret/GunBarrel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.257127, 0)
 mesh = SubResource("CylinderMesh_2t65x")
+skeleton = NodePath("../..")
 
 [node name="FireRateTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2t65x")
+}

@@ -1,3 +1,4 @@
+using BarbarianBlaster.Helper.Constants;
 using BarbarianBlaster.Helper.Groups;
 using Godot;
 using System;
@@ -15,6 +16,9 @@ public partial class Enemy : PathFollow3D
 
     [Export]
     private float _maxHealth = 50.0f;
+
+    [Export]
+    private AnimationPlayer _animator;
 
 
     private float _currentHealth;
@@ -51,6 +55,7 @@ public partial class Enemy : PathFollow3D
     public void TakeDamage(float damageAmount)
     {
         _currentHealth -= damageAmount;
+        _animator.Play(AnimationConsts.Enemy.DAMAGE_PLAYER);
         
         if (_currentHealth < 1.0f)
         {
