@@ -36,6 +36,25 @@ public partial class Bank : MarginContainer
         _goldAmountLabel.Text = $"Gold: {_goldAmount}";
     }
 
-
     // Member Methods------------------------------------------------------------------------------
+
+    public void AddGoldToBank(int amount)
+    {
+        GoldAmount += amount;
+    }
+
+    public void RemoveGoldFromBank(int amount)
+    {
+        GoldAmount -= amount;
+    }
+
+    public bool CanPurchase(int price)
+    {
+        if (price <= GoldAmount)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

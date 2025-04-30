@@ -15,6 +15,9 @@ public partial class Enemy : PathFollow3D
     private float _speed = 2.5f;
 
     [Export]
+    private int _rewardGoldAmount = 15;
+
+    [Export]
     private float _maxHealth = 50.0f;
 
     [Export]
@@ -23,6 +26,7 @@ public partial class Enemy : PathFollow3D
 
     private float _currentHealth;
     private HomeBase _homeBase;
+    private Bank _bank;
 
 
 
@@ -32,6 +36,7 @@ public partial class Enemy : PathFollow3D
     {
         _currentHealth = _maxHealth;
         _homeBase = GetTree().GetFirstNodeInGroup(SC_Groups.HOME_BASE) as HomeBase;
+        _bank = GetTree().GetFirstNodeInGroup(SC_Groups.BANK) as Bank;
     }
 
     public override void _ExitTree()
@@ -59,6 +64,7 @@ public partial class Enemy : PathFollow3D
         
         if (_currentHealth < 1.0f)
         {
+            _bank.AddGoldToBank(_rewardGoldAmount);
             QueueFree();
         } 
     }

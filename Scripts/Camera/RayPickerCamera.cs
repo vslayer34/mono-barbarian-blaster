@@ -1,4 +1,5 @@
 using BarbarianBlaster.Helper.Constants;
+using BarbarianBlaster.Helper.Groups;
 using BarbarianBlaster.Managers;
 using Godot;
 using System;
@@ -9,12 +10,17 @@ public partial class RayPickerCamera : Camera3D
     [Export]
     private float _rayDistance = 100.0f;
 
+    [Export]
+    private int _turretPirce = 100;
+
     private RayCast3D _rayCaster;
     private Vector2 _mousePosition;
 
     private GridMap _gridMap;
 
     private LevelManager _levelManager;
+
+    private Bank _bank;
 
 
 
@@ -26,6 +32,7 @@ public partial class RayPickerCamera : Camera3D
 
         await ToSignal(Owner, SignalName.Ready);
         _levelManager = GetOwner<LevelManager>();
+        _bank = GetTree().GetFirstNodeInGroup(SC_Groups.BANK) as Bank;
     }
 
     public override void _Process(double delta)
@@ -37,23 +44,29 @@ public partial class RayPickerCamera : Camera3D
 
         if (_rayCaster.IsColliding())
         {
-            Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
-            
-            if (_rayCaster.GetCollider() is GridMap)
+            if (_bank.CanPurchase(_turretPirce))
             {
-                if (Input.IsActionJustPressed(InputConsts.CLICK))
+                Input.SetDefaultCursorShape(Input.CursorShape.PointingHand);
+            
+                if (_rayCaster.GetCollider() is GridMap)
                 {
-                    LevelGridMap = _rayCaster.GetCollider() as GridMap;
-                    var cellPosition = LevelGridMap.LocalToMap(_rayCaster.GetCollisionPoint());
-                    GD.Print(cellPosition);
-
-                    if (LevelGridMap.GetCellItem(cellPosition) == 0)
+                    if (Input.IsActionJustPressed(InputConsts.CLICK))
                     {
-                        LevelGridMap.SetCellItem(cellPosition, 1);
-                        _levelManager.BuildTurret(LevelGridMap.MapToLocal(cellPosition));
+                        LevelGridMap = _rayCaster.GetCollider() as GridMap;
+                        var cellPosition = LevelGridMap.LocalToMap(_rayCaster.GetCollisionPoint());
+                        GD.Print(cellPosition);
+
+                        if (LevelGridMap.GetCellItem(cellPosition) == 0)
+                        {
+                            LevelGridMap.SetCellItem(cellPosition, 1);
+                            _levelManager.BuildTurret(LevelGridMap.MapToLocal(cellPosition));
+                        }
+
+                        _bank.RemoveGoldFromBank(_turretPirce);
                     }
                 }
-            }   
+            }
+               
         }
         else
         {

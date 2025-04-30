@@ -99,7 +99,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2585, 0, 2.1777)
 script = ExtResource("5_sur3v")
 _defenceTower = ExtResource("6_4rblm")
 
-[node name="Bank" type="MarginContainer" parent="." node_paths=PackedStringArray("_goldAmountLabel")]
+[node name="Bank" type="MarginContainer" parent="." node_paths=PackedStringArray("_goldAmountLabel") groups=["bank"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
