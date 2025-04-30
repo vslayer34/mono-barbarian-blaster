@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://diojofd6p2jvn"]
+[gd_scene load_steps=16 format=3 uid="uid://diojofd6p2jvn"]
 
 [ext_resource type="Script" uid="uid://bugpf7n0lj11r" path="res://Scripts/Managers/LevelManager.cs" id="1_4rblm"]
 [ext_resource type="MeshLibrary" uid="uid://bur0u11vdhf1i" path="res://MeshLibraries/ML_mesh-library.tres" id="1_5gpc1"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://btd4hvrg0nwsr" path="res://Scripts/Enemy/EnemyPath.cs" id="4_4rblm"]
 [ext_resource type="Script" uid="uid://rj4nogrbbnl8" path="res://Scripts/Allies/TurretManager.cs" id="5_sur3v"]
 [ext_resource type="PackedScene" uid="uid://yj3ma2wrk8hp" path="res://Scenes/Allies/tower.tscn" id="6_4rblm"]
+[ext_resource type="Script" uid="uid://c0itnjcey42kq" path="res://Scripts/Managers/Bank.cs" id="9_0k83q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i06e5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -32,6 +33,11 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, -0.000799803, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_ytws3"]
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="BaseLevel" type="Node3D" node_paths=PackedStringArray("_turretManager", "LevelPath")]
 script = ExtResource("1_4rblm")
@@ -92,3 +98,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2585, 0, 2.1777)
 [node name="TurretManager" type="Node3D" parent="."]
 script = ExtResource("5_sur3v")
 _defenceTower = ExtResource("6_4rblm")
+
+[node name="Bank" type="MarginContainer" parent="." node_paths=PackedStringArray("_goldAmountLabel")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("9_0k83q")
+_goldAmountLabel = NodePath("GoldAmountLabel")
+GoldAmount = 200
+
+[node name="GoldAmountLabel" type="Label" parent="Bank"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Placeholder"
+label_settings = SubResource("LabelSettings_ytws3")
