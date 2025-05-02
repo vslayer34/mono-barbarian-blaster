@@ -10,6 +10,8 @@ public partial class Bank : MarginContainer
     [ExportCategory("")]
     
     private int _goldAmount = 150;
+
+    private const int PLENTY_GOLD = 500;
     
     
     [Export(PropertyHint.Range, "0,999999,")]
@@ -57,4 +59,8 @@ public partial class Bank : MarginContainer
 
         return false;
     }
+
+    // Getters & Setters---------------------------------------------------------------------------
+
+    public bool IsGoldPlenty { get => GoldAmount > PLENTY_GOLD; }
 }

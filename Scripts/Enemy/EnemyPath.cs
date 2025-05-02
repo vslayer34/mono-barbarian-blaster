@@ -1,3 +1,4 @@
+using BarbarianBlaster.UI;
 using Godot;
 using System;
 
@@ -13,7 +14,7 @@ public partial class EnemyPath : Path3D
     private DifficultyManager _difficulityManager;
 
     [Export]
-    private CanvasLayer _victoryLayer;
+    private VictoryLayer _victoryLayer;
 
 
 
@@ -65,7 +66,7 @@ public partial class EnemyPath : Path3D
             }
 
             GD.Print("You Won!!!!!!");
-            _victoryLayer.Visible = true;
+            _victoryLayer.DisplayVictoryScreen();
         }
     }
 }

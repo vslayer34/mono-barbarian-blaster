@@ -51,4 +51,6 @@ public partial class HomeBase : Node3D
             }
         }
     }
+
+    public bool IsGameFinishedWithFullHealth { get => _currentHitPoints == _maxHitPoints; }
 }

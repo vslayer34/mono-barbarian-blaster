@@ -116,7 +116,7 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 script = ExtResource("9_0k83q")
 _goldAmountLabel = NodePath("GoldAmountLabel")
-GoldAmount = 200
+GoldAmount = 120000
 
 [node name="GoldAmountLabel" type="Label" parent="Bank"]
 layout_mode = 2

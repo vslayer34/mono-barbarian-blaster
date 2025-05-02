@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1j0fo8pb6vs0"]
+[gd_scene load_steps=4 format=3 uid="uid://b1j0fo8pb6vs0"]
 
 [ext_resource type="Script" uid="uid://m850id3sexnt" path="res://Scripts/UI/VictoryLayer.cs" id="1_y28o2"]
+[ext_resource type="Texture2D" uid="uid://baw8u6fvvu1jl" path="res://Assets/star.png" id="2_gn50y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y28o2"]
 font_size = 96
 
-[node name="VictoryLayer" type="CanvasLayer" node_paths=PackedStringArray("_retryBtn", "_quitBtn")]
-visible = false
+[node name="VictoryLayer" type="CanvasLayer" node_paths=PackedStringArray("_winStars", "_winConditionLabels", "_retryBtn", "_quitBtn")]
 script = ExtResource("1_y28o2")
-_retryBtn = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/RetryButton")
-_quitBtn = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/QuitButton")
+_winStars = [NodePath("CenterContainer/PanelContainer/VBoxContainer/StarsHBoxContainer/Star1"), NodePath("CenterContainer/PanelContainer/VBoxContainer/StarsHBoxContainer/Star2"), NodePath("CenterContainer/PanelContainer/VBoxContainer/StarsHBoxContainer/Star3")]
+_winConditionLabels = [NodePath("CenterContainer/PanelContainer/VBoxContainer/ConditionLabel1"), NodePath("CenterContainer/PanelContainer/VBoxContainer/ConditionLabel2"), NodePath("CenterContainer/PanelContainer/VBoxContainer/ConditionLabel3")]
+_retryBtn = NodePath("CenterContainer/PanelContainer/VBoxContainer/ButtonsHBoxContainer/RetryButton")
+_quitBtn = NodePath("CenterContainer/PanelContainer/VBoxContainer/ButtonsHBoxContainer/QuitButton")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -39,16 +41,52 @@ text = "Victory"
 label_settings = SubResource("LabelSettings_y28o2")
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="StarsHBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="RetryButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Star1" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarsHBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("2_gn50y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Star2" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarsHBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("2_gn50y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Star3" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarsHBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("2_gn50y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ConditionLabel1" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Survived + 1"
+
+[node name="ConditionLabel2" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "is that it? (full health) + 1"
+
+[node name="ConditionLabel3" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "money money money (more than 500) + 1"
+
+[node name="ButtonsHBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RetryButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Retry"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
