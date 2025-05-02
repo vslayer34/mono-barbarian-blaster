@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://diojofd6p2jvn"]
+[gd_scene load_steps=18 format=3 uid="uid://diojofd6p2jvn"]
 
 [ext_resource type="Script" uid="uid://bugpf7n0lj11r" path="res://Scripts/Managers/LevelManager.cs" id="1_4rblm"]
 [ext_resource type="MeshLibrary" uid="uid://bur0u11vdhf1i" path="res://MeshLibraries/ML_mesh-library.tres" id="1_5gpc1"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://yj3ma2wrk8hp" path="res://Scenes/Allies/tower.tscn" id="6_4rblm"]
 [ext_resource type="Script" uid="uid://c0itnjcey42kq" path="res://Scripts/Managers/Bank.cs" id="9_0k83q"]
 [ext_resource type="PackedScene" uid="uid://duhn88mvicqiy" path="res://Scenes/Managers/difficulty_manager.tscn" id="10_ta4i7"]
+[ext_resource type="PackedScene" uid="uid://b1j0fo8pb6vs0" path="res://Scenes/UI/victory_layer.tscn" id="11_rqtgi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i06e5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -86,7 +87,7 @@ path_interval = 0.1
 path_simplify_angle = 4.0
 path_rotation = 2
 path_rotation_accurate = false
-path_local = false
+path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
@@ -126,13 +127,4 @@ label_settings = SubResource("LabelSettings_ytws3")
 
 [node name="DifficultyManager" parent="." instance=ExtResource("10_ta4i7")]
 
-[node name="VictoryLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="VictoryLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.784314)
+[node name="VictoryLayer" parent="." instance=ExtResource("11_rqtgi")]

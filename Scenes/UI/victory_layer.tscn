@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1j0fo8pb6vs0"]
+
+[ext_resource type="Script" uid="uid://m850id3sexnt" path="res://Scripts/UI/VictoryLayer.cs" id="1_y28o2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y28o2"]
+font_size = 96
+
+[node name="VictoryLayer" type="CanvasLayer" node_paths=PackedStringArray("_retryBtn", "_quitBtn")]
+visible = false
+script = ExtResource("1_y28o2")
+_retryBtn = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/RetryButton")
+_quitBtn = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/QuitButton")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VictoryTitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Victory"
+label_settings = SubResource("LabelSettings_y28o2")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RetryButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Retry"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Quit"
