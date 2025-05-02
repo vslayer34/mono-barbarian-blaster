@@ -12,6 +12,9 @@ public partial class EnemyPath : Path3D
     [Export]
     private DifficultyManager _difficulityManager;
 
+    [Export]
+    private CanvasLayer _victoryLayer;
+
 
 
     // Game Loop Methods---------------------------------------------------------------------------
@@ -39,7 +42,7 @@ public partial class EnemyPath : Path3D
         AddChild(enemy);
         _spawnTimer.WaitTime = _difficulityManager.SpawnTime;
 
-        GD.Print(_difficulityManager.EnemyHealth);
+        enemy.TreeExited += CheckIfAllEnemiesAreDown;
     }
 
     // Signal Methods------------------------------------------------------------------------------
@@ -47,5 +50,22 @@ public partial class EnemyPath : Path3D
     private void StopSpawning()
     {
         _spawnTimer.Stop();
+    }
+
+    private void CheckIfAllEnemiesAreDown()
+    {
+        if (_spawnTimer.IsStopped())
+        {
+            foreach (var enemy in GetChildren())
+            {
+                if (enemy is PathFollow3D)
+                {
+                    return;
+                }
+            }
+
+            GD.Print("You Won!!!!!!");
+            _victoryLayer.Visible = true;
+        }
     }
 }
