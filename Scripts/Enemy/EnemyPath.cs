@@ -9,6 +9,9 @@ public partial class EnemyPath : Path3D
     [Export]
     private Timer _spawnTimer;
 
+    [Export]
+    private DifficultyManager _difficulityManager;
+
 
 
     // Game Loop Methods---------------------------------------------------------------------------
@@ -31,5 +34,6 @@ public partial class EnemyPath : Path3D
     {
         Enemy enemy = _enemyScene.Instantiate<Enemy>();
         AddChild(enemy);
+        _spawnTimer.WaitTime = _difficulityManager.SpawnTime;
     }
 }

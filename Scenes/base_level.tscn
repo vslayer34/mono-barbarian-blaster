@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://diojofd6p2jvn"]
+[gd_scene load_steps=17 format=3 uid="uid://diojofd6p2jvn"]
 
 [ext_resource type="Script" uid="uid://bugpf7n0lj11r" path="res://Scripts/Managers/LevelManager.cs" id="1_4rblm"]
 [ext_resource type="MeshLibrary" uid="uid://bur0u11vdhf1i" path="res://MeshLibraries/ML_mesh-library.tres" id="1_5gpc1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://rj4nogrbbnl8" path="res://Scripts/Allies/TurretManager.cs" id="5_sur3v"]
 [ext_resource type="PackedScene" uid="uid://yj3ma2wrk8hp" path="res://Scenes/Allies/tower.tscn" id="6_4rblm"]
 [ext_resource type="Script" uid="uid://c0itnjcey42kq" path="res://Scripts/Managers/Bank.cs" id="9_0k83q"]
+[ext_resource type="PackedScene" uid="uid://duhn88mvicqiy" path="res://Scenes/Managers/difficulty_manager.tscn" id="10_ta4i7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i06e5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -67,11 +68,12 @@ data = {
 "cells": PackedInt32Array(65535, 65535, 1179648, 65535, 65534, 1179648, 1, 65535, 1179648, 3, 65535, 1179648, 4, 65535, 1179648, 65534, 65535, 1179648, 65533, 65535, 1179648, 65532, 65535, 1179648, 65531, 65535, 1179648, 65531, 65533, 1179648, 65532, 65533, 1179648, 65533, 65533, 1179648, 65534, 65533, 1179648, 65534, 65534, 1179648, 3, 65534, 1179648, 4, 0, 1179648, 4, 1, 1179648, 4, 2, 1179648, 3, 2, 1179648, 2, 2, 1179648, 1, 2, 1179648, 0, 2, 1179648, 65535, 2, 1179648, 65534, 2, 1179648, 65533, 2, 1179648, 65531, 2, 1179648, 65531, 1, 1179648, 65531, 0, 1179648, 65531, 65534, 1179648, 65535, 65533, 1179648, 0, 65533, 1179648, 1, 65533, 1179648, 2, 65533, 1179648, 3, 65533, 1179648, 4, 65533, 1179648, 4, 65534, 1179648, 1, 0, 1179648, 65535, 0, 1179648, 65532, 65534, 1179648, 65533, 65534, 1179648, 65533, 1, 1179648, 1, 1, 1179648, 2, 1, 1179648, 3, 1, 1179648)
 }
 
-[node name="EnemyPath" type="Path3D" parent="." node_paths=PackedStringArray("_spawnTimer")]
+[node name="EnemyPath" type="Path3D" parent="." node_paths=PackedStringArray("_spawnTimer", "_difficulityManager")]
 curve = SubResource("Curve3D_5gpc1")
 script = ExtResource("4_4rblm")
 _enemyScene = ExtResource("2_5s04l")
 _spawnTimer = NodePath("EnemySpanwTimer")
+_difficulityManager = NodePath("../DifficultyManager")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="EnemyPath"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0117378, -0.00990343, 0.0263948)
@@ -120,3 +122,5 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "Placeholder"
 label_settings = SubResource("LabelSettings_ytws3")
+
+[node name="DifficultyManager" parent="." instance=ExtResource("10_ta4i7")]
