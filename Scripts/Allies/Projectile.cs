@@ -48,7 +48,7 @@ public partial class Projectile : Area3D
         {
             var enemy = area.GetParent<Enemy>();
             
-            enemy?.TakeDamage(10.0f);
+            enemy?.TakeDamage(30.0f);
             SelfDestruct();
         }
     }

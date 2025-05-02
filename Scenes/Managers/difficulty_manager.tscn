@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://duhn88mvicqiy"]
+[gd_scene load_steps=4 format=3 uid="uid://duhn88mvicqiy"]
 
 [ext_resource type="Script" uid="uid://cyrtgr8672vmu" path="res://Scripts/Managers/DifficultyManager.cs" id="1_0lgy4"]
 
@@ -7,10 +7,16 @@ _limits = [1.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, -1.0, 0, 1, Vector2(1, 1), -1.0, 0.0, 1, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_g2plq"]
+_limits = [10.0, 150.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 140.0, 0, 1, Vector2(1, 150), 140.0, 0.0, 1, 0]
+point_count = 2
+
 [node name="DifficultyManager" type="Node" node_paths=PackedStringArray("_gameDuratonTimer")]
 script = ExtResource("1_0lgy4")
 _gameDuratonTimer = NodePath("GameDurationTimer")
 _spawnRatioCurve = SubResource("Curve_0lgy4")
+_enemyHealthCurve = SubResource("Curve_g2plq")
 
 [node name="GameDurationTimer" type="Timer" parent="."]
 one_shot = true

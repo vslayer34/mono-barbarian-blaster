@@ -19,11 +19,13 @@ public partial class EnemyPath : Path3D
     public override void _Ready()
     {
         _spawnTimer.Timeout += SpawnEnemy;
+        _difficulityManager.RoundTimePassed += StopSpawning;
     }
 
     public override void _ExitTree()
     {
         _spawnTimer.Timeout -= SpawnEnemy;
+        _difficulityManager.RoundTimePassed -= StopSpawning;
     }
 
 
@@ -33,7 +35,17 @@ public partial class EnemyPath : Path3D
     private void SpawnEnemy()
     {
         Enemy enemy = _enemyScene.Instantiate<Enemy>();
+        enemy.MaxHealth = _difficulityManager.EnemyHealth;
         AddChild(enemy);
         _spawnTimer.WaitTime = _difficulityManager.SpawnTime;
+
+        GD.Print(_difficulityManager.EnemyHealth);
+    }
+
+    // Signal Methods------------------------------------------------------------------------------
+
+    private void StopSpawning()
+    {
+        _spawnTimer.Stop();
     }
 }

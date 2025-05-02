@@ -18,7 +18,7 @@ public partial class Enemy : PathFollow3D
     private int _rewardGoldAmount = 15;
 
     [Export]
-    private float _maxHealth = 50.0f;
+    public float MaxHealth { get; set; } = 50.0f;
 
     [Export]
     private AnimationPlayer _animator;
@@ -34,7 +34,7 @@ public partial class Enemy : PathFollow3D
 
     public override void _Ready()
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = MaxHealth;
         _homeBase = GetTree().GetFirstNodeInGroup(SC_Groups.HOME_BASE) as HomeBase;
         _bank = GetTree().GetFirstNodeInGroup(SC_Groups.BANK) as Bank;
     }

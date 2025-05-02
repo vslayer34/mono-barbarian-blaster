@@ -3,6 +3,9 @@ using System;
 
 public partial class DifficultyManager : Node
 {
+    [Signal]
+    public delegate void RoundTimePassedEventHandler();
+
     [Export]
     private float _gameLength = 30.0f;
 
@@ -11,6 +14,9 @@ public partial class DifficultyManager : Node
 
     [Export]
     private Curve _spawnRatioCurve;
+    
+    [Export]
+    private Curve _enemyHealthCurve;
 
 
 
@@ -19,16 +25,18 @@ public partial class DifficultyManager : Node
     public override void _Ready()
     {
         _gameDuratonTimer.Start(_gameLength);
+        _gameDuratonTimer.Timeout += StopSpawningEnemies;
     }
 
-    public override void _Process(double delta)
+    // Signal Methods------------------------------------------------------------------------------
+
+    private void StopSpawningEnemies()
     {
-        GD.Print(SpawnTime);
+        EmitSignal(SignalName.RoundTimePassed);
     }
-
-    // Member Methods------------------------------------------------------------------------------
 
     // Getters & Setters---------------------------------------------------------------------------
+
 
     public float GameProgressRatio
     {
@@ -41,5 +49,10 @@ public partial class DifficultyManager : Node
     public float SpawnTime
     {
         get => _spawnRatioCurve.Sample(GameProgressRatio);
+    }
+
+    public float EnemyHealth
+    {
+        get => _enemyHealthCurve.Sample(GameProgressRatio);
     }
 }
