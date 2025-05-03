@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdk750yjgwrdw"]
+[gd_scene load_steps=5 format=3 uid="uid://bdk750yjgwrdw"]
 
 [ext_resource type="Script" uid="uid://c0hkpn3esupso" path="res://Scripts/Allies/HomeBase.cs" id="1_pipgd"]
+[ext_resource type="PackedScene" uid="uid://ccynq6or8wd4i" path="res://Assets/30_BB_G3D - Castle Meshes/Base.glb" id="2_sos7t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4jmu"]
 albedo_color = Color(0.715429, 0.724026, 0.204881, 1)
@@ -14,6 +15,7 @@ _maxHitPoints = 5
 
 [node name="CastleMesh" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 size = Vector3(4, 1, 4)
 material = SubResource("StandardMaterial3D_c4jmu")
 
@@ -53,3 +55,5 @@ billboard = 1
 text = "Starting Hitpoints"
 font_size = 500
 outline_size = 100
+
+[node name="Base" parent="." instance=ExtResource("2_sos7t")]

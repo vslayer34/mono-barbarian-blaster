@@ -11,6 +11,9 @@ public partial class Tower : Node3D
     private PackedScene _projectileScene;
 
     [Export]
+    private Node3D _cannon;
+
+    [Export]
     private Marker3D _projectileSpawnPosition;
 
     [Export]
@@ -40,7 +43,7 @@ public partial class Tower : Node3D
 
         if (currentTarget != null)
         {
-            LookAt(currentTarget.GlobalPosition, Vector3.Up, true);
+            _cannon.LookAt(currentTarget.GlobalPosition, Vector3.Up, true);
         }
     }
 
@@ -84,9 +87,9 @@ public partial class Tower : Node3D
         AddChild(projectile);
 
         projectile.GlobalPosition = _projectileSpawnPosition.GlobalPosition;
-        projectile.ForwardDirection = GlobalTransform.Basis.Z;
+        projectile.ForwardDirection = _cannon.GlobalTransform.Basis.Z;
         // projectile.Basis = Basis;
-        projectile.Rotation = GlobalRotation;
+        projectile.Rotation = _cannon.GlobalRotation;
         
         _animator.Play(AnimationConsts.Turret.SHOOT_SHELL);
     }

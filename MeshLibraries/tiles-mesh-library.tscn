@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://chlexbmm8e8ea"]
+[gd_scene load_steps=8 format=3 uid="uid://chlexbmm8e8ea"]
+
+[ext_resource type="PackedScene" uid="uid://bgrlp53ycvao" path="res://Assets/30_BB_G3D - Castle Meshes/Rocks.glb" id="1_8gvjg"]
+[ext_resource type="PackedScene" uid="uid://rtqhls3fhgep" path="res://Assets/30_BB_G3D - Castle Meshes/Tree.glb" id="2_k3ub0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_facqv"]
-albedo_color = Color(0.572988, 0.572988, 0.572988, 1)
+blend_mode = 1
+albedo_color = Color(0.106258, 0.10484, 0.10484, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_facqv"]
 material = SubResource("StandardMaterial3D_facqv")
@@ -11,7 +15,8 @@ size = Vector3(4, 0.1, 4)
 data = PackedVector3Array(-2, 0.05, 2, 2, 0.05, 2, -2, -0.05, 2, 2, 0.05, 2, 2, -0.05, 2, -2, -0.05, 2, 2, 0.05, -2, -2, 0.05, -2, 2, -0.05, -2, -2, 0.05, -2, -2, -0.05, -2, 2, -0.05, -2, 2, 0.05, 2, 2, 0.05, -2, 2, -0.05, 2, 2, 0.05, -2, 2, -0.05, -2, 2, -0.05, 2, -2, 0.05, -2, -2, 0.05, 2, -2, -0.05, -2, -2, 0.05, 2, -2, -0.05, 2, -2, -0.05, -2, 2, 0.05, 2, -2, 0.05, 2, 2, 0.05, -2, -2, 0.05, 2, -2, 0.05, -2, 2, 0.05, -2, -2, -0.05, 2, 2, -0.05, 2, -2, -0.05, -2, 2, -0.05, 2, 2, -0.05, -2, -2, -0.05, -2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gvjg"]
-albedo_color = Color(0.121569, 0.380392, 0.0784314, 1)
+transparency = 1
+albedo_color = Color(0.121569, 0.380392, 0.0784314, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_k3ub0"]
 material = SubResource("StandardMaterial3D_8gvjg")
@@ -20,7 +25,7 @@ size = Vector3(4, 0.1, 4)
 [node name="TilesMeshLibrary" type="Node3D"]
 
 [node name="FreeSpace" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98915, 0.0674656, -0.00588989)
 mesh = SubResource("BoxMesh_facqv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FreeSpace"]
@@ -29,5 +34,11 @@ mesh = SubResource("BoxMesh_facqv")
 shape = SubResource("ConcavePolygonShape3D_facqv")
 
 [node name="TurretBase" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02141, 0.05, 0)
 mesh = SubResource("BoxMesh_k3ub0")
+
+[node name="Rocks" parent="." instance=ExtResource("1_8gvjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Tree" parent="Rocks" instance=ExtResource("2_k3ub0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)

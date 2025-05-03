@@ -1,7 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://yj3ma2wrk8hp"]
+[gd_scene load_steps=18 format=3 uid="uid://yj3ma2wrk8hp"]
 
 [ext_resource type="Script" uid="uid://cdaxgtsjl77dr" path="res://Scripts/Allies/Tower.cs" id="1_jq3ya"]
 [ext_resource type="PackedScene" uid="uid://wcmhlqekbtna" path="res://Scenes/Allies/projectile.tscn" id="2_ryoxx"]
+[ext_resource type="PackedScene" uid="uid://foy6adutxahd" path="res://Assets/30_BB_G3D - Castle Meshes/TurretBase.glb" id="3_sex5g"]
+[ext_resource type="PackedScene" uid="uid://bptljkj62fcy3" path="res://Assets/30_BB_G3D - Castle Meshes/Cannon.glb" id="4_1ly81"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_el8q3"]
 albedo_color = Color(0.11491, 0.357438, 0.0470801, 1)
@@ -46,7 +48,7 @@ bottom_radius = 0.06
 height = 0.5
 
 [sub_resource type="Animation" id="Animation_2t65x"]
-length = 0.001
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,13 +61,25 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0.13087, 0.975183)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TurretBase/Cannon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.14576, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_ryoxx"]
 resource_name = "shoot_shell"
-length = 0.4
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("TowerBody/TowerTurret/GunBarrel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -75,6 +89,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0.13087, 0.975183), Vector3(0, 0.13087, 0.708099), Vector3(0, 0.13087, 0.975183)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TurretBase/Cannon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.14576, 0), Vector3(0, 2.14576, -0.29065), Vector3(0, 2.14576, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2t65x"]
 _data = {
@@ -82,14 +108,16 @@ _data = {
 &"shoot_shell": SubResource("Animation_ryoxx")
 }
 
-[node name="Tower" type="Node3D" node_paths=PackedStringArray("_projectileSpawnPosition", "_animator")]
+[node name="Tower" type="Node3D" node_paths=PackedStringArray("_cannon", "_projectileSpawnPosition", "_animator")]
 script = ExtResource("1_jq3ya")
 _projectileScene = ExtResource("2_ryoxx")
-_projectileSpawnPosition = NodePath("TowerBody/TowerTurret/GunBarrel/ProjectileExitPosition")
+_cannon = NodePath("TurretBase/Cannon")
+_projectileSpawnPosition = NodePath("TurretBase/Cannon/ProjectileExitPosition")
 _animator = NodePath("AnimationPlayer")
 
 [node name="TowerBody" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 mesh = SubResource("CylinderMesh_el8q3")
 
 [node name="TowerRing" type="MeshInstance3D" parent="TowerBody"]
@@ -104,9 +132,6 @@ mesh = SubResource("SphereMesh_el8q3")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.13087, 0.975183)
 mesh = SubResource("CylinderMesh_ryoxx")
 
-[node name="ProjectileExitPosition" type="Marker3D" parent="TowerBody/TowerTurret/GunBarrel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01504, -2.38419e-07)
-
 [node name="GunShroud" type="MeshInstance3D" parent="TowerBody/TowerTurret/GunBarrel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.257127, 0)
 mesh = SubResource("CylinderMesh_2t65x")
@@ -119,3 +144,11 @@ autostart = true
 libraries = {
 &"": SubResource("AnimationLibrary_2t65x")
 }
+
+[node name="TurretBase" parent="." instance=ExtResource("3_sex5g")]
+
+[node name="Cannon" parent="TurretBase" instance=ExtResource("4_1ly81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.14576, 0)
+
+[node name="ProjectileExitPosition" type="Marker3D" parent="TurretBase/Cannon"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.850133, 1.39767)
